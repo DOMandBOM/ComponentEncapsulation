@@ -24,13 +24,14 @@ let scrollLeft = 0
 
 // isDragging 当用户鼠标按下，isDragging设置为真，为后面鼠标移动事件做铺垫
 const startDrag = (e: MouseEvent) => {
+  if (!scrollContent.value) return
   isDragging = true
   startX = e.pageX - scrollContent.value.offsetLeft
   scrollLeft = scrollContent.value.scrollLeft //可见内容与实际内容距离
 }
 
 const onDrag = (e: MouseEvent) => {
-  if (!isDragging) return
+  if (!isDragging || !scrollContent.value) return
   e.preventDefault()
   const x = e.pageX - scrollContent.value.offsetLeft
   const walk = (x - startX) * 1 // 滚动速度
